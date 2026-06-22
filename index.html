@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Nota de Serviço</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #e5e5e5;
+    padding: 20px;
+    color: #222;
+  }
+
+  .pagina {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: #fff;
+    padding: 15mm 18mm;
+    box-shadow: 0 0 10px rgba(0,0,0,.15);
+    font-size: 11pt;
+    line-height: 1.4;
+  }
+
+  /* Cabeçalho */
+  .cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid #1a3a6c;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  .empresa h1 {
+    font-size: 20pt;
+    color: #1a3a6c;
+    margin-bottom: 4px;
+  }
+  .empresa small { display: block; color: #555; }
+
+  .titulo-nota {
+    text-align: right;
+  }
+  .titulo-nota h2 {
+    font-size: 16pt;
+    color: #1a3a6c;
+    letter-spacing: 1px;
+  }
+  .titulo-nota .num-data {
+    margin-top: 6px;
+    font-size: 10pt;
+  }
+
+  /* Campos */
+  .secao {
+    margin-bottom: 14px;
+  }
+  .secao h3 {
+    background: #1a3a6c;
+    color: #fff;
+    padding: 4px 10px;
+    font-size: 10pt;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .linha-campos {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .campo {
+    flex: 1;
+    min-width: 180px;
+  }
+  .campo label {
+    font-size: 9pt;
+    color: #555;
+    display: block;
+    margin-bottom: 2px;
+    font-weight: 600;
+  }
+  .campo input, .campo textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 1px dotted #999;
+    padding: 4px 2px;
+    font-size: 11pt;
+    font-family: inherit;
+    background: transparent;
+    outline: none;
+  }
+  .campo textarea {
+    resize: vertical;
+    min-height: 40px;
+    border: 1px dotted #999;
+    padding: 4px;
+  }
+  .campo input:focus, .campo textarea:focus {
+    border-bottom-color: #1a3a6c;
+    background: #f5f8ff;
+  }
+
+  /* Tabela de serviços */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 4px;
+  }
+  table th {
+    background: #1a3a6c;
+    color: #fff;
+    padding: 6px 8px;
+    text-align: left;
+    font-size: 10pt;
+    font-weight: 600;
+  }
+  table td {
+    border: 1px solid #ccc;
+    padding: 0;
+    vertical-align: middle;
+  }
+  table td input {
+    width: 100%;
+    border: none;
+    padding: 6px 8px;
+    font-size: 11pt;
+    font-family: inherit;
+    background: transparent;
+    outline: none;
+  }
+  table td.num input { text-align: right; }
+  table td.desc input { text-align: left; }
+
+  .col-desc { width: 45%; }
+  .col-qtd { width: 10%; }
+  .col-unit { width: 20%; }
+  .col-total { width: 20%; }
+
+  /* Totais */
+  .totais {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .totais table {
+    width: 320px;
+  }
+  .totais td {
+    border: none;
+    padding: 4px 8px;
+    font-size: 11pt;
+  }
+  .totais tr.total-geral td {
+    background: #1a3a6c;
+    color: #fff;
+    font-weight: bold;
+    font-size: 12pt;
+    border-top: 2px solid #1a3a6c;
+  }
+  .totais td.rot { text-align: right; color: #555; }
+  .totais td.val { text-align: right; font-weight: 600; }
+
+  /* Pagamento e obs */
+  .duas-colunas {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  .duas-colunas > div { flex: 1; }
+
+  /* Assinaturas */
+  .assinaturas {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .assinatura {
+    flex: 1;
+    text-align: center;
+    border-top: 1px solid #333;
+    padding-top: 6px;
+    font-size: 10pt;
+  }
+
+  /* Botão imprimir */
+  .acoes {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .acoes button {
+    background: #1a3a6c;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    font-size: 11pt;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 6px;
+  }
+  .acoes button:hover { background: #2a5298; }
+  .acoes button.sec { background: #666; }
+
+  /* Impressão */
+  @media print {
+    @page { size: A4; margin: 0; }
+    body { background: #fff; padding: 0; }
+    .pagina { box-shadow: none; width: 100%; padding: 15mm 18mm; }
+    .acoes { display: none; }
+    .campo input, .campo textarea, table td input {
+      border: none !important;
+      background: transparent !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="acoes">
+  <button onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
+  <button class="sec" onclick="location.reload()">🔄 Limpar</button>
+</div>
+
+<div class="pagina">
+
+  <!-- CABEÇALHO -->
+  <div class="cabecalho">
+    <div class="empresa">
+      <h1 contenteditable="true">Nome da Sua Empresa</h1>
+      <small contenteditable="true">CNPJ: 00.000.000/0001-00</small>
+      <small contenteditable="true">Rua Exemplo, 123 – Bairro – Cidade/UF – CEP 00000-000</small>
+      <small contenteditable="true">Telefone: (00) 0000-0000 | email@empresa.com</small>
+    </div>
+    <div class="titulo-nota">
+      <h2>NOTA DE SERVIÇO</h2>
+      <div class="num-data">
+        <div>Nº <input type="text" placeholder="001" style="width:80px;border-bottom:1px dotted #999;border:none;"></div>
+        <div>Data: <input type="date" style="border-bottom:1px dotted #999;border:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DADOS DO CLIENTE -->
+  <div class="secao">
+    <h3>Dados do Cliente</h3>
+    <div class="linha-campos">
+      <div class="campo" style="flex:2;">
+        <label>Nome / Razão Social</label>
+        <input type="text">
+      </div>
+      <div class="campo">
+        <label>CPF / CNPJ</label>
+        <input type="text">
+      </div>
+    </div>
+    <div class="linha-campos">
+      <div class="campo" style="flex:2;">
+        <label>Endereço</label>
+        <input type="text">
+      </div>
+      <div class="campo">
+        <label>Telefone</label>
+        <input type="text">
+      </div>
+    </div>
+    <div class="linha-campos">
+      <div class="campo">
+        <label>Cidade</label>
+        <input type="text">
+      </div>
+      <div class="campo">
+        <label>UF</label>
+        <input type="text">
+      </div>
+      <div class="campo">
+        <label>CEP</label>
+        <input type="text">
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVIÇOS -->
+  <div class="secao">
+    <h3>Descrição dos Serviços</h3>
+    <table>
+      <thead>
+        <tr>
+          <th class="col-desc">Descrição do Serviço</th>
+          <th class="col-qtd">Qtd.</th>
+          <th class="col-unit">Valor Unit. (R$)</th>
+          <th class="col-total">Total (R$)</th>
+        </tr>
+      </thead>
+      <tbody id="tbody-servicos">
+        <tr>
+          <td class="desc"><input type="text"></td>
+          <td class="num"><input type="number" step="0.01" class="qtd"></td>
+          <td class="num"><input type="number" step="0.01" class="unit"></td>
+          <td class="num"><input type="text" class="total" readonly></td>
+        </tr>
+        <tr>
+          <td class="desc"><input type="text"></td>
+          <td class="num"><input type="number" step="0.01" class="qtd"></td>
+          <td class="num"><input type="number" step="0.01" class="unit"></td>
+          <td class="num"><input type="text" class="total" readonly></td>
+        </tr>
+        <tr>
+          <td class="desc"><input type="text"></td>
+          <td class="num"><input type="number" step="0.01" class="qtd"></td>
+          <td class="num"><input type="number" step="0.01" class="unit"></td>
+          <td class="num"><input type="text" class="total" readonly></td>
+        </tr>
+        <tr>
+          <td class="desc"><input type="text"></td>
+          <td class="num"><input type="number" step="0.01" class="qtd"></td>
+          <td class="num"><input type="number" step="0.01" class="unit"></td>
+          <td class="num"><input type="text" class="total" readonly></td>
+        </tr>
+        <tr>
+          <td class="desc"><input type="text"></td>
+          <td class="num"><input type="number" step="0.01" class="qtd"></td>
+          <td class="num"><input type="number" step="0.01" class="unit"></td>
+          <td class="num"><input type="text" class="total" readonly></td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:6px;">
+      <button onclick="adicionarLinha()" style="background:#1a3a6c;color:#fff;border:none;padding:6px 14px;cursor:pointer;border-radius:3px;font-size:10pt;">+ Adicionar linha</button>
+    </div>
+  </div>
+
+  <!-- TOTAIS -->
+  <div class="totais">
+    <table>
+      <tr>
+        <td class="rot">Subtotal:</td>
+        <td class="val">R$ <span id="subtotal">0,00</span></td>
+      </tr>
+      <tr>
+        <td class="rot">Desconto (R$):</td>
+        <td class="val"><input type="number" id="desconto" step="0.01" value="0" style="width:100px;text-align:right;border:none;border-bottom:1px dotted #999;"></td>
+      </tr>
+      <tr class="total-geral">
+        <td class="rot" style="color:#fff;">TOTAL GERAL:</td>
+        <td class="val">R$ <span id="total-geral">0,00</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- PAGAMENTO E OBS -->
+  <div class="duas-colunas">
+    <div class="secao" style="margin-bottom:0;">
+      <h3>Forma de Pagamento</h3>
+      <div class="campo">
+        <input type="text" placeholder="Ex: Pix, Dinheiro, Cartão, Boleto...">
+      </div>
+      <div class="campo" style="margin-top:6px;">
+        <label>Vencimento</label>
+        <input type="date">
+      </div>
+    </div>
+    <div class="secao" style="margin-bottom:0;">
+      <h3>Observações</h3>
+      <div class="campo">
+        <textarea placeholder="Informações adicionais, garantias, prazos..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ASSINATURAS -->
+  <div class="assinaturas">
+    <div class="assinatura" contenteditable="true">Prestador de Serviço</div>
+    <div class="assinatura" contenteditable="true">Cliente</div>
+  </div>
+
+</div>
+
+<script>
+  // Cálculo automático dos totais
+  function calcular() {
+    let subtotal = 0;
+    document.querySelectorAll('#tbody-servicos tr').forEach(tr => {
+      const qtd = parseFloat(tr.querySelector('.qtd').value) || 0;
+      const unit = parseFloat(tr.querySelector('.unit').value) || 0;
+      const total = qtd * unit;
+      tr.querySelector('.total').value = total ? total.toFixed(2).replace('.', ',') : '';
+      subtotal += total;
+    });
+    const desc = parseFloat(document.getElementById('desconto').value) || 0;
+    const final_ = subtotal - desc;
+    document.getElementById('subtotal').textContent = subtotal.toFixed(2).replace('.', ',');
+    document.getElementById('total-geral').textContent = final_.toFixed(2).replace('.', ',');
+  }
+
+  document.addEventListener('input', e => {
+    if (e.target.matches('.qtd, .unit, #desconto')) calcular();
+  });
+
+  function adicionarLinha() {
+    const tbody = document.getElementById('tbody-servicos');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="desc"><input type="text"></td>
+      <td class="num"><input type="number" step="0.01" class="qtd"></td>
+      <td class="num"><input type="number" step="0.01" class="unit"></td>
+      <td class="num"><input type="text" class="total" readonly></td>
+    `;
+    tbody.appendChild(tr);
+  }
+</script>
+
+</body>
+</html>
