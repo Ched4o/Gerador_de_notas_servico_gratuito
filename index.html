@@ -13,6 +13,68 @@
     color: #222;
   }
 
+  /* Controles superiores */
+  .controles {
+    text-align: center;
+    margin: 0 auto 20px;
+    max-width: 800px;
+    background: #fff;
+    padding: 14px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+  }
+  .controles .grupo { margin-bottom: 10px; }
+  .controles p {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #1a3a6c;
+    font-size: 10pt;
+  }
+  .controles button {
+    background: #e0e0e0;
+    color: #333;
+    border: 2px solid transparent;
+    padding: 8px 18px;
+    font-size: 10pt;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 4px;
+    font-weight: 600;
+    transition: all .2s;
+  }
+  .controles button.ativo {
+    background: #1a3a6c;
+    color: #fff;
+  }
+  .controles button:hover:not(.ativo) { background: #cfcfcf; }
+
+  .acoes {
+    text-align: center;
+    margin: 15px 0;
+  }
+  .acoes button {
+    background: #1a3a6c;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    font-size: 11pt;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 6px;
+  }
+  .acoes button:hover { background: #2a5298; }
+  .acoes button.sec { background: #666; }
+
+  /* Aviso de ocultação */
+  .aviso {
+    text-align: center;
+    font-size: 9pt;
+    color: #666;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* Página A4 (padrão) */
   .pagina {
     width: 210mm;
     min-height: 297mm;
@@ -22,7 +84,76 @@
     box-shadow: 0 0 10px rgba(0,0,0,.15);
     font-size: 11pt;
     line-height: 1.4;
+    transition: all .3s;
   }
+
+  /* Página A5 (metade) */
+  body.papel-a5 .pagina {
+    width: 148mm;
+    min-height: 210mm;
+    padding: 10mm 12mm;
+    font-size: 9pt;
+    line-height: 1.3;
+  }
+
+  /* Ajustes específicos para A5 */
+  body.papel-a5 .empresa h1 { font-size: 14pt; }
+  body.papel-a5 .empresa small { font-size: 7.5pt; }
+  body.papel-a5 .titulo-nota h2 { font-size: 11pt; }
+  body.papel-a5 .titulo-nota .num-data { font-size: 8pt; }
+  body.papel-a5 .secao { margin-bottom: 10px; }
+  body.papel-a5 .secao h3 { 
+    padding: 3px 8px; 
+    font-size: 8pt; 
+    margin-bottom: 5px;
+  }
+  body.papel-a5 .campo label { font-size: 7pt; }
+  body.papel-a5 .campo input, 
+  body.papel-a5 .campo textarea { 
+    font-size: 9pt; 
+    padding: 2px 1px;
+  }
+  body.papel-a5 .campo textarea { min-height: 30px; }
+  body.papel-a5 table th { 
+    padding: 4px 5px; 
+    font-size: 8pt; 
+  }
+  body.papel-a5 table td input { 
+    padding: 4px 5px; 
+    font-size: 9pt; 
+  }
+  body.papel-a5 .totais table { width: 240px; }
+  body.papel-a5 .totais td { 
+    padding: 3px 5px; 
+    font-size: 9pt; 
+  }
+  body.papel-a5 .totais tr.total-geral td { font-size: 10pt; }
+  body.papel-a5 .totais input { width: 70px; font-size: 9pt; }
+  body.papel-a5 .duas-colunas { gap: 8px; }
+  body.papel-a5 .assinaturas { 
+    margin-top: 30px; 
+    gap: 20px;
+  }
+  body.papel-a5 .assinatura { 
+    font-size: 8pt; 
+    padding-top: 4px;
+  }
+  body.papel-a5 .rodape { 
+    margin-top: 15px; 
+    font-size: 7pt;
+    padding-top: 5px;
+  }
+  body.papel-a5 .linha-campos { gap: 6px; margin-bottom: 3px; }
+  body.papel-a5 .campo { min-width: 120px; }
+
+  /* Controle de visibilidade por modo */
+  .apenas-completo,
+  .apenas-simplificado { display: none; }
+
+  body.modo-completo .apenas-completo { display: block; }
+  body.modo-simplificado .apenas-simplificado { display: block; }
+  body.modo-completo .apenas-completo.flex { display: flex; }
+  body.modo-simplificado .apenas-simplificado.flex { display: flex; }
 
   /* Cabeçalho */
   .cabecalho {
@@ -31,36 +162,47 @@
     align-items: flex-start;
     border-bottom: 2px solid #1a3a6c;
     padding-bottom: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
   }
+  body.papel-a5 .cabecalho {
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+  }
+
   .empresa h1 {
     font-size: 20pt;
     color: #1a3a6c;
     margin-bottom: 4px;
   }
-  .empresa small { display: block; color: #555; }
+  .empresa small { display: block; color: #555; font-size: 9.5pt; }
 
-  .titulo-nota {
-    text-align: right;
-  }
+  .titulo-nota { text-align: right; }
   .titulo-nota h2 {
-    font-size: 16pt;
+    font-size: 15pt;
     color: #1a3a6c;
     letter-spacing: 1px;
   }
   .titulo-nota .num-data {
-    margin-top: 6px;
+    margin-top: 8px;
     font-size: 10pt;
   }
-
-  /* Campos */
-  .secao {
-    margin-bottom: 14px;
+  .titulo-nota .num-data div { margin-bottom: 4px; }
+  .titulo-nota input {
+    border: none;
+    border-bottom: 1px dotted #999;
+    padding: 2px 4px;
+    font-family: inherit;
+    font-size: 10pt;
+    background: transparent;
+    outline: none;
   }
+
+  /* Seções */
+  .secao { margin-bottom: 16px; }
   .secao h3 {
     background: #1a3a6c;
     color: #fff;
-    padding: 4px 10px;
+    padding: 5px 10px;
     font-size: 10pt;
     letter-spacing: 1px;
     margin-bottom: 8px;
@@ -73,10 +215,7 @@
     flex-wrap: wrap;
     margin-bottom: 6px;
   }
-  .campo {
-    flex: 1;
-    min-width: 180px;
-  }
+  .campo { flex: 1; min-width: 180px; }
   .campo label {
     font-size: 9pt;
     color: #555;
@@ -96,13 +235,9 @@
   }
   .campo textarea {
     resize: vertical;
-    min-height: 40px;
+    min-height: 50px;
     border: 1px dotted #999;
     padding: 4px;
-  }
-  .campo input:focus, .campo textarea:focus {
-    border-bottom-color: #1a3a6c;
-    background: #f5f8ff;
   }
 
   /* Tabela de serviços */
@@ -114,7 +249,7 @@
   table th {
     background: #1a3a6c;
     color: #fff;
-    padding: 6px 8px;
+    padding: 7px 8px;
     text-align: left;
     font-size: 10pt;
     font-weight: 600;
@@ -127,7 +262,7 @@
   table td input {
     width: 100%;
     border: none;
-    padding: 6px 8px;
+    padding: 7px 8px;
     font-size: 11pt;
     font-family: inherit;
     background: transparent;
@@ -136,36 +271,44 @@
   table td.num input { text-align: right; }
   table td.desc input { text-align: left; }
 
-  .col-desc { width: 45%; }
+  .col-desc { width: 50%; }
   .col-qtd { width: 10%; }
-  .col-unit { width: 20%; }
-  .col-total { width: 20%; }
+  .col-unit { width: 18%; }
+  .col-total { width: 22%; }
 
   /* Totais */
   .totais {
-    margin-top: 10px;
+    margin-top: 12px;
     display: flex;
     justify-content: flex-end;
   }
-  .totais table {
-    width: 320px;
-  }
+  .totais table { width: 320px; }
   .totais td {
     border: none;
-    padding: 4px 8px;
+    padding: 5px 8px;
     font-size: 11pt;
   }
   .totais tr.total-geral td {
     background: #1a3a6c;
     color: #fff;
     font-weight: bold;
-    font-size: 12pt;
+    font-size: 13pt;
     border-top: 2px solid #1a3a6c;
   }
   .totais td.rot { text-align: right; color: #555; }
   .totais td.val { text-align: right; font-weight: 600; }
+  .totais input {
+    border: none;
+    border-bottom: 1px dotted #999;
+    text-align: right;
+    font-family: inherit;
+    font-size: 11pt;
+    background: transparent;
+    outline: none;
+    width: 100px;
+  }
 
-  /* Pagamento e obs */
+  /* Duas colunas */
   .duas-colunas {
     display: flex;
     gap: 15px;
@@ -175,7 +318,7 @@
 
   /* Assinaturas */
   .assinaturas {
-    margin-top: 50px;
+    margin-top: 60px;
     display: flex;
     justify-content: space-between;
     gap: 40px;
@@ -188,38 +331,61 @@
     font-size: 10pt;
   }
 
-  /* Botão imprimir */
-  .acoes {
+  /* Rodapé */
+  .rodape {
+    margin-top: 30px;
     text-align: center;
-    margin: 20px 0;
+    font-size: 8.5pt;
+    color: #888;
+    border-top: 1px dashed #ccc;
+    padding-top: 8px;
   }
-  .acoes button {
-    background: #1a3a6c;
-    color: #fff;
-    border: none;
-    padding: 12px 28px;
-    font-size: 11pt;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 0 6px;
-  }
-  .acoes button:hover { background: #2a5298; }
-  .acoes button.sec { background: #666; }
 
-  /* Impressão */
+  /* Impressão - ocultação inteligente */
   @media print {
-    @page { size: A4; margin: 0; }
+    @page { margin: 0; }
     body { background: #fff; padding: 0; }
-    .pagina { box-shadow: none; width: 100%; padding: 15mm 18mm; }
-    .acoes { display: none; }
-    .campo input, .campo textarea, table td input {
+    body.papel-a4 .pagina { 
+      width: 210mm; 
+      padding: 15mm 18mm; 
+    }
+    body.papel-a5 .pagina { 
+      width: 148mm; 
+      padding: 10mm 12mm; 
+    }
+    body.papel-a4 @page { size: A4; }
+    body.papel-a5 @page { size: A5; }
+    .pagina { box-shadow: none; }
+    .controles, .acoes, .aviso { display: none !important; }
+    .campo input, .campo textarea, table td input, .titulo-nota input, .totais input {
       border: none !important;
       background: transparent !important;
     }
+    
+    /* Ocultar campos vazios do cliente na impressão */
+    .campo-cliente-vazio { display: none !important; }
+    .linha-campos-toda-vazia { display: none !important; }
   }
 </style>
 </head>
-<body>
+<body class="modo-completo papel-a4">
+
+<!-- CONTROLES -->
+<div class="controles">
+  <div class="grupo">
+    <p>Tipo de Nota:</p>
+    <button id="btn-completo" class="ativo" onclick="trocarModo('completo')">📋 Completa</button>
+    <button id="btn-simplificado" onclick="trocarModo('simplificado')">⚡ Simplificada</button>
+  </div>
+  <div class="grupo">
+    <p>Tamanho do Papel:</p>
+    <button id="btn-a4" class="ativo" onclick="trocarPapel('a4')">📄 A4 (Folha Inteira)</button>
+    <button id="btn-a5" onclick="trocarPapel('a5')">📃 A5 (Metade da Folha)</button>
+  </div>
+  <div class="aviso">
+    💡 No modo Completo, campos do cliente vazios serão ocultados automaticamente apenas na impressão/PDF.
+  </div>
+</div>
 
 <div class="acoes">
   <button onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
@@ -233,64 +399,73 @@
     <div class="empresa">
       <h1 contenteditable="true">Nome da Sua Empresa</h1>
       <small contenteditable="true">CNPJ: 00.000.000/0001-00</small>
-      <small contenteditable="true">Rua Exemplo, 123 – Bairro – Cidade/UF – CEP 00000-000</small>
-      <small contenteditable="true">Telefone: (00) 0000-0000 | email@empresa.com</small>
+      <small contenteditable="true">Rua Exemplo, 123 – Bairro – Cidade/UF</small>
+      <small contenteditable="true">Telefone: (00) 0000-0000</small>
     </div>
     <div class="titulo-nota">
       <h2>NOTA DE SERVIÇO</h2>
       <div class="num-data">
-        <div>Nº <input type="text" placeholder="001" style="width:80px;border-bottom:1px dotted #999;border:none;"></div>
-        <div>Data: <input type="date" style="border-bottom:1px dotted #999;border:none;"></div>
+        <div>Nº <input type="text" placeholder="001" style="width:70px;"></div>
+        <div>Data: <input type="date"></div>
       </div>
     </div>
   </div>
 
-  <!-- DADOS DO CLIENTE -->
-  <div class="secao">
+  <!-- DADOS DO CLIENTE (só no modo completo) -->
+  <div class="secao apenas-completo" id="secao-cliente">
     <h3>Dados do Cliente</h3>
     <div class="linha-campos">
       <div class="campo" style="flex:2;">
         <label>Nome / Razão Social</label>
-        <input type="text">
+        <input type="text" class="campo-cliente">
       </div>
       <div class="campo">
         <label>CPF / CNPJ</label>
-        <input type="text">
+        <input type="text" class="campo-cliente">
       </div>
     </div>
     <div class="linha-campos">
       <div class="campo" style="flex:2;">
         <label>Endereço</label>
-        <input type="text">
+        <input type="text" class="campo-cliente">
       </div>
       <div class="campo">
         <label>Telefone</label>
-        <input type="text">
+        <input type="text" class="campo-cliente">
       </div>
     </div>
     <div class="linha-campos">
       <div class="campo">
         <label>Cidade</label>
-        <input type="text">
+        <input type="text" class="campo-cliente">
       </div>
       <div class="campo">
         <label>UF</label>
-        <input type="text">
+        <input type="text" class="campo-cliente">
       </div>
       <div class="campo">
         <label>CEP</label>
-        <input type="text">
+        <input type="text" class="campo-cliente">
       </div>
+    </div>
+  </div>
+
+  <!-- REFERÊNCIA (só no modo simplificado) -->
+  <div class="secao apenas-simplificado">
+    <h3>Referência</h3>
+    <div class="campo">
+      <label>Referente a (ordem, equipamento, local, etc.)</label>
+      <input type="text" placeholder="Ex: Manutenção do veículo placa ABC-1234 / OS 2026-058">
     </div>
   </div>
 
   <!-- SERVIÇOS -->
   <div class="secao">
-    <h3>Descrição dos Serviços</h3>
+    <h3>Serviços Prestados</h3>
     <table>
       <thead>
         <tr>
-          <th class="col-desc">Descrição do Serviço</th>
+          <th class="col-desc">Descrição</th>
           <th class="col-qtd">Qtd.</th>
           <th class="col-unit">Valor Unit. (R$)</th>
           <th class="col-total">Total (R$)</th>
@@ -327,9 +502,15 @@
           <td class="num"><input type="number" step="0.01" class="unit"></td>
           <td class="num"><input type="text" class="total" readonly></td>
         </tr>
+        <tr>
+          <td class="desc"><input type="text"></td>
+          <td class="num"><input type="number" step="0.01" class="qtd"></td>
+          <td class="num"><input type="number" step="0.01" class="unit"></td>
+          <td class="num"><input type="text" class="total" readonly></td>
+        </tr>
       </tbody>
     </table>
-    <div style="margin-top:6px;">
+    <div style="margin-top:8px;">
       <button onclick="adicionarLinha()" style="background:#1a3a6c;color:#fff;border:none;padding:6px 14px;cursor:pointer;border-radius:3px;font-size:10pt;">+ Adicionar linha</button>
     </div>
   </div>
@@ -343,10 +524,10 @@
       </tr>
       <tr>
         <td class="rot">Desconto (R$):</td>
-        <td class="val"><input type="number" id="desconto" step="0.01" value="0" style="width:100px;text-align:right;border:none;border-bottom:1px dotted #999;"></td>
+        <td class="val"><input type="number" id="desconto" step="0.01" value="0"></td>
       </tr>
       <tr class="total-geral">
-        <td class="rot" style="color:#fff;">TOTAL GERAL:</td>
+        <td class="rot" style="color:#fff;">TOTAL:</td>
         <td class="val">R$ <span id="total-geral">0,00</span></td>
       </tr>
     </table>
@@ -355,11 +536,16 @@
   <!-- PAGAMENTO E OBS -->
   <div class="duas-colunas">
     <div class="secao" style="margin-bottom:0;">
-      <h3>Forma de Pagamento</h3>
+      <h3>Pagamento</h3>
       <div class="campo">
-        <input type="text" placeholder="Ex: Pix, Dinheiro, Cartão, Boleto...">
+        <label>Forma</label>
+        <input type="text" placeholder="Pix, Dinheiro, Cartão...">
       </div>
-      <div class="campo" style="margin-top:6px;">
+      <div class="campo apenas-simplificado" style="margin-top:8px;">
+        <label>Status</label>
+        <input type="text" placeholder="Pago / A pagar / Parcial">
+      </div>
+      <div class="campo apenas-completo" style="margin-top:8px;">
         <label>Vencimento</label>
         <input type="date">
       </div>
@@ -367,7 +553,7 @@
     <div class="secao" style="margin-bottom:0;">
       <h3>Observações</h3>
       <div class="campo">
-        <textarea placeholder="Informações adicionais, garantias, prazos..."></textarea>
+        <textarea placeholder="Garantia, prazo, condições..."></textarea>
       </div>
     </div>
   </div>
@@ -378,10 +564,29 @@
     <div class="assinatura" contenteditable="true">Cliente</div>
   </div>
 
+  <!-- RODAPÉ (só no simplificado) -->
+  <div class="rodape apenas-simplificado" contenteditable="true">
+    Documento simplificado de prestação de serviço • Obrigado pela preferência!
+  </div>
+
 </div>
 
 <script>
-  // Cálculo automático dos totais
+  // Troca de modo
+  function trocarModo(modo) {
+    document.body.className = document.body.className.replace(/modo-\w+/, 'modo-' + modo);
+    document.getElementById('btn-completo').classList.toggle('ativo', modo === 'completo');
+    document.getElementById('btn-simplificado').classList.toggle('ativo', modo === 'simplificado');
+  }
+
+  // Troca de papel
+  function trocarPapel(tamanho) {
+    document.body.className = document.body.className.replace(/papel-\w+/, 'papel-' + tamanho);
+    document.getElementById('btn-a4').classList.toggle('ativo', tamanho === 'a4');
+    document.getElementById('btn-a5').classList.toggle('ativo', tamanho === 'a5');
+  }
+
+  // Cálculo automático
   function calcular() {
     let subtotal = 0;
     document.querySelectorAll('#tbody-servicos tr').forEach(tr => {
@@ -397,9 +602,51 @@
     document.getElementById('total-geral').textContent = final_.toFixed(2).replace('.', ',');
   }
 
+  // Marcar campos vazios para ocultação na impressão
+  function marcarCamposVazios() {
+    const secaoCliente = document.getElementById('secao-cliente');
+    if (!secaoCliente) return;
+
+    // Remove todas as marcações anteriores
+    secaoCliente.querySelectorAll('.campo-cliente-vazio').forEach(el => {
+      el.classList.remove('campo-cliente-vazio');
+    });
+    secaoCliente.querySelectorAll('.linha-campos-toda-vazia').forEach(el => {
+      el.classList.remove('linha-campos-toda-vazia');
+    });
+
+    // Marca campos vazios
+    secaoCliente.querySelectorAll('.campo-cliente').forEach(input => {
+      const campo = input.closest('.campo');
+      const valor = input.value.trim();
+      if (valor === '') {
+        campo.classList.add('campo-cliente-vazio');
+      }
+    });
+
+    // Marca linhas inteiras vazias
+    secaoCliente.querySelectorAll('.linha-campos').forEach(linha => {
+      const camposPreenchidos = linha.querySelectorAll('.campo-cliente');
+      let temPreenchido = false;
+      camposPreenchidos.forEach(input => {
+        if (input.value.trim() !== '') {
+          temPreenchido = true;
+        }
+      });
+      if (!temPreenchido) {
+        linha.classList.add('linha-campos-toda-vazia');
+      }
+    });
+  }
+
+  // Eventos
   document.addEventListener('input', e => {
     if (e.target.matches('.qtd, .unit, #desconto')) calcular();
+    if (e.target.classList.contains('campo-cliente')) marcarCamposVazios();
   });
+
+  // Antes de imprimir, marca os campos vazios
+  window.addEventListener('beforeprint', marcarCamposVazios);
 
   function adicionarLinha() {
     const tbody = document.getElementById('tbody-servicos');
